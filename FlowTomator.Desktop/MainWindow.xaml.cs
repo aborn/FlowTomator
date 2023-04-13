@@ -486,6 +486,7 @@ namespace FlowTomator.Desktop
             }
 
             Flows.Add(flowInfo);
+            currentFlow = flowInfo;
             NotifyPropertyChanged(nameof(Flows));
         }
         public void Save(FlowInfo flowInfo)
