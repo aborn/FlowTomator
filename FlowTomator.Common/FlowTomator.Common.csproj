@@ -53,6 +53,7 @@
     <Compile Include="Nodes\Applications\RunApplication.cs" />
     <Compile Include="Model\Event.cs" />
     <Compile Include="Model\Node.cs" />
+    <Compile Include="Nodes\Basics\Basics.cs" />
     <Compile Include="Nodes\Devices\Inputs\MouseMove.cs" />
     <Compile Include="Nodes\Devices\Network\NetworkSpeed.cs" />
     <Compile Include="Nodes\General\Wait.cs" />
