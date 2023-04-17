@@ -31,8 +31,8 @@ namespace FlowTomator.Common
         }
 
         private Variable<int> i = new Variable<int>("i", 0, "The path of the application to launch");
-        private Variable<int> start = new Variable<int>("起始值", 0, "初始值");
-        private Variable<int> end = new Variable<int>("结束值", 0, "初始值");
+        private Variable<int> start = new Variable<int>("Start", 0, "循环开始值（包含）");
+        private Variable<int> end = new Variable<int>("End", 0, "循环结束值（不包含）");
         private Variable content = new Variable("Content", typeof(object), null, "The content of the clipboard");
 
         public override NodeResult Run()
