@@ -139,13 +139,14 @@ namespace FlowTomator.Desktop
         {
             NodeStep nodeStep;
             nodeInfo.Status = NodeStatus.Running;
-           
+            Dictionary<string, object> Context = new Dictionary<string, object>();
             try
             {
                 Log.Trace(DebuggerCategory, "Entering node {0}", nodeInfo.Type.Name);
 
                 nodeStep = nodeInfo.Node.Evaluate();
 
+                Log.Trace(DebuggerCategory, "==={0}", nodeInfo.Node.Context["result"]);
                 Log.Trace(DebuggerCategory, "Exiting node {0} with result {1}", nodeInfo.Type.Name, nodeStep.Result);
             }
             catch (Exception e)
@@ -170,7 +171,11 @@ namespace FlowTomator.Desktop
             NodeInfo[] nodeInfos = nodeStep.Slot.Nodes.Select(n => NodeInfo.From(FlowInfo, n)).ToArray();
 
             foreach (NodeInfo node in nodeInfos)
+            {
                 node.Status = NodeStatus.Paused;
+                node.Node.Context = nodeInfo.Node.Context;  // 将当前运行节点的context传递到下步执行的节点里
+            }
+                
 
             lock (nodes)
                 nodes.AddRange(nodeInfos);

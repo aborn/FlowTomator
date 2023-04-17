@@ -19,6 +19,7 @@ namespace FlowTomator.Common
         private Slot slot = new Slot("Out");
 
         public abstract NodeResult Run();
+
         public sealed override NodeStep Evaluate()
         {
             return new NodeStep(Run(), slot);

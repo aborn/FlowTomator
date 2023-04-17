@@ -52,6 +52,9 @@ namespace FlowTomator.Common
 
         public virtual Dictionary<string, object> Metadata { get; } = new Dictionary<string, object>();
 
+        // 执行上下文保存的数据，提供给整体执行
+        public Dictionary<string, object> Context { get; set; } = new Dictionary<string, object>();
+
         public virtual void Reset() { }
         public abstract NodeStep Evaluate();
     }

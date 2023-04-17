@@ -37,6 +37,7 @@ namespace FlowTomator.Common
 
         public override NodeResult Run()
         {
+            Log.Debug("前一个节点的运行结果为： {0}", Context["result"]);
             if (start.Value >= end.Value)
             {
                 return NodeResult.Skip;
@@ -49,7 +50,21 @@ namespace FlowTomator.Common
             }
             content.Value = i.Value;
             Log.Debug("结果为：{0}", content.Value);
+
+            // 保存当前节点的结果，到上下文
+            Context["result"] = content.Value;            
             return NodeResult.Success;
         }
+    }
+
+    [Node("流程合并", "基本逻辑", "两个及以上流程合并成一个，需要等待执行完成后再执行")]
+    public class FlowMerge: Task
+    {
+        public override NodeResult Run()
+        {
+            Log.Debug("前一个节点的运行结果为： {0}", Context["result"]);
+            return NodeResult.Success;
+        }
+        
     }
 }
