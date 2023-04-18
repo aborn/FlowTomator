@@ -189,6 +189,7 @@ namespace FlowTomator.Desktop
                     else
                     {
                         LogThreadInfo();
+                        // nodeInfo.FlowInfo.Update();   // 通知界面更新状态
                         Log.Info("当前{0}为汇聚节点！前置节点已经执行完成，可以开始执行", node.Node.Id);
                         lock (flowMerge)
                         {
@@ -197,7 +198,7 @@ namespace FlowTomator.Desktop
                             {
                                 flowMerge.Status = NStatus.Ready;
                                 nextCanRunNodes.Add(node);
-                                Log.Info("当前{0}为汇聚节点！前置节点已经执行完成，可以开始执行@@@@", node.Node.Id);
+                                Log.Info("当前{0}为汇聚节点！前置节点已经执行完成，可以开始执行@@@@{1}", node.Node.Id, nodeInfo.Node.Id);
                                 Log.Info("nodeType {0}", node.Type);
                                 node.Status = NodeStatus.Paused;
                                 node.Node.Context = nodeInfo.Node.Context;  // 将当前运行节点的context传递到下步执行的节点里

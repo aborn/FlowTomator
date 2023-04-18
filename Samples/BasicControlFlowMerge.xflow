@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Flow>
+  <Properties />
+  <Nodes>
+    <Node Type="FlowTomator.Common.Origin" Id="0">
+      <Metadata Position.X="124" Position.Y="40" />
+      <Slot Name="Out">
+        <Node Id="2" />
+        <Node Id="3" />
+        <Node Id="4" />
+        <Node Id="5" />
+      </Slot>
+    </Node>
+    <Node Type="FlowTomator.Common.FlowMerge" Id="1">
+      <Metadata Position.X="416" Position.Y="360" />
+    </Node>
+    <Node Type="FlowTomator.Common.LoopStart" Id="2">
+      <Inputs i="38" End="20" />
+      <Metadata Position.X="132" Position.Y="176" />
+      <Slot Name="Out">
+        <Node Id="1" />
+      </Slot>
+    </Node>
+    <Node Type="FlowTomator.Common.LoopStart" Id="3">
+      <Inputs i="38" End="20" />
+      <Metadata Position.X="296" Position.Y="180" />
+      <Slot Name="Out">
+        <Node Id="1" />
+      </Slot>
+    </Node>
+    <Node Type="FlowTomator.Common.LoopStart" Id="4">
+      <Inputs i="38" End="20" />
+      <Metadata Position.X="460" Position.Y="180" />
+      <Slot Name="Out">
+        <Node Id="1" />
+      </Slot>
+    </Node>
+    <Node Type="FlowTomator.Common.Sleep" Id="5">
+      <Inputs Duration="5000" />
+      <Metadata Position.X="636" Position.Y="192" />
+      <Slot Name="Out">
+        <Node Id="1" />
+      </Slot>
+    </Node>
+  </Nodes>
+</Flow>
