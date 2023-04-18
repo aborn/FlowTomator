@@ -85,6 +85,7 @@ namespace FlowTomator.Desktop
         private void Reset()
         {
             FlowInfo.Flow.Reset();
+            FlowInfo.Init();
 
             nodes.Clear();
             nodes = FlowInfo.Flow.Origins
@@ -166,16 +167,46 @@ namespace FlowTomator.Desktop
             }
 
             NodeInfo[] nodeInfos = nodeStep.Slot.Nodes.Select(n => NodeInfo.From(FlowInfo, n)).ToArray();
+            List<NodeInfo> nextCanRunNodes = new List<NodeInfo>();
 
             foreach (NodeInfo node in nodeInfos)
             {
-                node.Status = NodeStatus.Paused;
-                node.Node.Context = nodeInfo.Node.Context;  // 将当前运行节点的context传递到下步执行的节点里
-            }
+                if (node.Type.FullName == "FlowTomator.Common.FlowMerge")
+                {
+                    FlowMerge flowMerge = node.Node as FlowMerge;
+                    if (!flowMerge.TryRun(nodeInfo.Node))
+                    {                  
+                        Log.Info("当前为汇聚节点！且前置节点未执行完成，不能开始执行当前节点");
+                    }
+                    else
+                    {
+                        Log.Info("当前为汇聚节点！前置节点已经执行完成，可以开始执行");
+                        lock (node)
+                        {
+                            // 这里加锁是为了防止汇聚节点的并发问题导致，FlowMerge被多次加入到可执行的task列表里
+                            if (node.Status != NodeStatus.Paused)
+                            {
+                                nextCanRunNodes.Add(node);
+                                Log.Info("当前为汇聚节点！前置节点已经执行完成，可以开始执行@@@@");
+                                Log.Info("nodeType {0}", node.Type);
+                                node.Status = NodeStatus.Paused;
+                                node.Node.Context = nodeInfo.Node.Context;  // 将当前运行节点的context传递到下步执行的节点里
+                            }                   
+                        }
+                    }
+                } else
+                {
+                    nextCanRunNodes.Add(node);
+                    Log.Info("nodeType {0}", node.Type);
+                    node.Status = NodeStatus.Paused;
+                    node.Node.Context = nodeInfo.Node.Context;  // 将当前运行节点的context传递到下步执行的节点里
+                }
                 
+            }
+
 
             lock (nodes)
-                nodes.AddRange(nodeInfos);
+                nodes.AddRange(nextCanRunNodes);
         }
     }
 }

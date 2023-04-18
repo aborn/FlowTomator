@@ -55,6 +55,9 @@ namespace FlowTomator.Common
         // 执行上下文保存的数据，提供给整体执行
         public Dictionary<string, object> Context { get; set; } = new Dictionary<string, object>();
 
+        // 保存节点ID，以备打点使用
+        public int Id { get; set; } = -1;
+
         // 获取前一个节点的运行结果
         public object GetPreNodeResult()
         {

@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("Sleep", "General", "Wait for the specified amount of time before resuming")]
+    [Node("延时", "系统", "等待多长时间后执行（单位ms）")]
     public class Sleep : Task
     {
         public override IEnumerable<Variable> Inputs

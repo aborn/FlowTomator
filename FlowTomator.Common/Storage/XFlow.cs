@@ -108,6 +108,7 @@ namespace FlowTomator.Common
                     XElement[] slotsElement = nodeElement.Elements("Slot").ToArray();
 
                     Node node = Activator.CreateInstance(type) as Node;
+                    node.Id = id;
                     
                     // Read inputs
                     if (inputsElement != null)
@@ -381,6 +382,7 @@ namespace FlowTomator.Common
                         continue;
 
                     XElement slotElement = new XElement("Slot");
+                    slotElement.Add(new XAttribute("Name", slots[j].Name));
 
                     if (slots.Length > 1)
                         slotElement.Add(new XAttribute("Index", j));
