@@ -11,7 +11,6 @@ namespace FlowTomator.Common
     {
         public override NodeResult Run()
         {
-            Context["result"] = "start node.";
             return NodeResult.Success;
         }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("循环开始", "基本逻辑", "Run the specified application")]
+    [Node("循环", "基本逻辑", "循环节点处理，类似For循环")]
     public class LoopStart: Task
     {
         public override IEnumerable<Variable> Inputs
@@ -37,7 +37,9 @@ namespace FlowTomator.Common
 
         public override NodeResult Run()
         {
-            Log.Debug("前一个节点的运行结果为： {0}", Context["result"]);
+
+            Log.Debug("当前：LoopStart，前一个节点的运行结果为： {0}", GetPreNodeResult()??"null");
+
             if (start.Value >= end.Value)
             {
                 return NodeResult.Skip;
@@ -57,12 +59,12 @@ namespace FlowTomator.Common
         }
     }
 
-    [Node("流程合并", "基本逻辑", "两个及以上流程合并成一个，需要等待执行完成后再执行")]
+    [Node("流程汇聚", "基本逻辑", "多个流程汇聚成一个，需要等待执行完成后再执行")]
     public class FlowMerge: Task
     {
         public override NodeResult Run()
         {
-            Log.Debug("前一个节点的运行结果为： {0}", Context["result"]);
+            Log.Debug("当前：FlowMerge，前一个节点的运行结果为： {0}", GetPreNodeResult()??"null");
             return NodeResult.Success;
         }
         

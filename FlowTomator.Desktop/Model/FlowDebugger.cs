@@ -143,10 +143,7 @@ namespace FlowTomator.Desktop
             try
             {
                 Log.Trace(DebuggerCategory, "Entering node {0}", nodeInfo.Type.Name);
-
                 nodeStep = nodeInfo.Node.Evaluate();
-
-                Log.Trace(DebuggerCategory, "==={0}", nodeInfo.Node.Context["result"]);
                 Log.Trace(DebuggerCategory, "Exiting node {0} with result {1}", nodeInfo.Type.Name, nodeStep.Result);
             }
             catch (Exception e)
