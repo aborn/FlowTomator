@@ -63,10 +63,22 @@ namespace FlowTomator.Common
     [Node("流程汇聚", "基本逻辑", "多个流程汇聚成一个，需要等待执行完成后再执行")]
     public class FlowMerge : Task
     {
+        public override IEnumerable<Variable> Outputs
+        {
+            get
+            {
+                yield return Progress;
+            }
+        }
+
+        private Variable<string> Progress = new Variable<string>("Progress", "0%", "前置节点执行的进度");
+
         // 汇聚节点的前置节点列表
         public List<Node> PreNodes { get; set; } = new List<Node>();
 
         private Dictionary<int, bool> State = new Dictionary<int, bool>();
+
+        public NStatus Status { get; set; } = NStatus.Init;
 
         public void Init()
         {
@@ -74,6 +86,7 @@ namespace FlowTomator.Common
             {
                 State[n.Id] = false;
             }
+            Status = NStatus.Init;
             Log.Info(" node{0} 初始化成功", Id);
         }
 
@@ -88,10 +101,19 @@ namespace FlowTomator.Common
             }
             bool resl = CanRun();
 
+            int total = 0;
+            int finished = 0;
             foreach (Node n in PreNodes)
             {
+                if (State[n.Id])
+                {
+                    finished++;
+                }
+                total++;
                 Log.Info("__ {0} @ {1}  -->  {2}", n.ToString(), n.Id, State[n.Id]);
             }
+            Progress.Value = (((float)finished) / total) * 100 + "%";
+            Log.Info($"Progress: {Progress.Value}");
             return resl;
         }
 
@@ -109,12 +131,14 @@ namespace FlowTomator.Common
 
         public override NodeResult Run()
         {
+            Status = NStatus.Running;
             if (PreNodes.Count == 0)
             {
                 return NodeResult.Skip;
             }
 
             Log.Debug("当前：FlowMerge，前一个节点的运行结果为： {0}", GetPreNodeResult() ?? "null");
+            Status = NStatus.Finished;
             return NodeResult.Success;
         }
 

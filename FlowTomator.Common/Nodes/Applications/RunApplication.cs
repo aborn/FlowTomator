@@ -77,7 +77,7 @@ namespace FlowTomator.Common
 
         private Variable<ApplicationPatternType> type = new Variable<ApplicationPatternType>("Type", ApplicationPatternType.FileName, "The application property to check");
         private Variable<string> pattern = new Variable<string>("Pattern", null, "The pattern to check");
-        private Variable<Process> process = new Variable<Process>("Process", null, "The first process that matched the specified properties");
+        private Variable<Process> process = new Variable<Process>("Progress", null, "The first process that matched the specified properties");
 
         public override NodeStep Evaluate()
         {

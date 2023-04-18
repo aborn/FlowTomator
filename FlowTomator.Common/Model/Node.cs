@@ -6,6 +6,14 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
+    public enum NStatus
+    {
+        Running,  // 表示正在执行
+        Finished, // 表示已执行完成
+        Init,    
+        Ready, // 表示已经加入到执行列表，准备执行
+    }
+
     public enum NodeResult
     {
         /// <summary>
