@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("ReadFile", "IO", "Reads the content of the specified file")]
+    [Node("读文件", "IO", "Reads the content of the specified file")]
     public class ReadFile : Task
     {
         public override IEnumerable<Variable> Inputs

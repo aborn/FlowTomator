@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("DeleteFile", "IO", "Delete the specified file")]
+    [Node("删除文件", "IO", "Delete the specified file")]
     public class DeleteFile : Task
     {
         public override IEnumerable<Variable> Inputs

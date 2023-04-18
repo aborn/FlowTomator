@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("CreateDirectory", "IO", "Create a directory at the specified location")]
+    [Node("创建文件夹", "IO", "Create a directory at the specified location")]
     public class CreateDirectory : Task
     {
         public override IEnumerable<Variable> Inputs

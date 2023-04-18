@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("CreateFile", "IO", "Create a file at the specified location")]
+    [Node("创建文件", "IO", "Create a file at the specified location")]
     public class CreateFile : Task
     {
         public override IEnumerable<Variable> Inputs

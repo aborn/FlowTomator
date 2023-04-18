@@ -10,7 +10,7 @@ using System.Xml.Linq;
 
 namespace FlowTomator.Common
 {
-    [Node("循环", "基本逻辑", "循环节点处理，类似For循环")]
+    [Node("循环开始", "基本逻辑", "循环节点处理，类似For循环，需要结合循环结束节点一起")]
     public class LoopStart : Task
     {
         public override IEnumerable<Variable> Inputs
@@ -56,6 +56,15 @@ namespace FlowTomator.Common
 
             // 保存当前节点的结果，到上下文
             Context["result"] = content.Value;
+            return NodeResult.Success;
+        }
+    }
+
+    [Node("循环结束", "基本逻辑", "循环结束节点")]
+    public class LoopEnd: Task
+    {
+        public override NodeResult Run()
+        {
             return NodeResult.Success;
         }
     }

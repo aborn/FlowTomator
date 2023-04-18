@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("WriteFile", "IO", "Writes the specified content in the specified file")]
+    [Node("写文件", "IO", "写内容到文件")]
     public class WriteFile : Task
     {
         public override IEnumerable<Variable> Inputs

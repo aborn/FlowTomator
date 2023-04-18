@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FlowTomator.Common
 {
-    [Node("FileExists", "IO", "Checks if the specified file exists")]
+    [Node("文件存在？", "IO", "判断文件是否存在")]
     public class FileExists : BinaryChoice
     {
         public override IEnumerable<Variable> Inputs
