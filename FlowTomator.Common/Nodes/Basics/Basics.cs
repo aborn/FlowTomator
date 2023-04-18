@@ -60,7 +60,7 @@ namespace FlowTomator.Common
         }
     }
 
-    [Node("流程汇聚", "基本逻辑", "多个流程汇聚成一个，需要等待执行完成后再执行")]
+    [Node("流程合并", "基本逻辑", "多个流程汇聚成一个，需要等待执行完成后再执行")]
     public class FlowMerge : Task
     {
         public override IEnumerable<Variable> Outputs
